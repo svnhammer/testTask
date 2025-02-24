@@ -10,5 +10,6 @@ import { RepositorySchema, TradeEntry } from './repository.schema';
     ]),
   ],
   providers: [RepositoryService],
+  exports: [RepositoryModule, MongooseModule]
 })
-export class RepositoryModule {}
+export class RepositoryModule { }

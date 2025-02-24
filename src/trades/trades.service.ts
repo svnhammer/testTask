@@ -17,15 +17,24 @@ export class TradesService {
             params: { symbol: symbol.toUpperCase(), fromId }
         });
 
+        console.log(response);
+
         const { data } = response;
 
+        await this._saveHistoricalTrades(symbol, data);
+        return data;
     }
 
     async _saveHistoricalTrades(symbol: string, trades: Record<string, any>[]) {
+        this.logger.log('saving');
         if (!trades.length) return;
 
-        const tradesWithSymbol = trades.map((trade: ITradeEntry) => {
-
-        })
+        const tradesWithSymbol = trades.map((trade: ITradeEntry) => ({
+            symbol,
+            ...trade
+        }));
+        this.logger.log('trades retrieved');
+        await this.tradeEntryModel.insertMany(tradesWithSymbol);
+        this.logger.log(`${trades.length} historical trades were stored in the database`);
     }
 }

@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { config } from 'dotenv';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TradesModule } from './trades/trades.module';
@@ -14,7 +12,7 @@ config();
     TradesModule,
     RepositoryModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
-export class AppModule {}
+export class AppModule { }

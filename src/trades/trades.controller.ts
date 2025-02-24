@@ -11,6 +11,6 @@ export class TradesController {
             throw new BadRequestException('No symbol provided');
         }
 
-
+        return await this.tradesService.getHistoricalTrades(symbol, fromId);
     }
 }
