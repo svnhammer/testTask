@@ -1,9 +1,10 @@
 export interface ITradeEntry {
-    id: number;
-    price: number;
-    qty: number;
-    quoteQty: number;
-    time: number;
-    isBuyerMaker: boolean;
-    isBestMatch: boolean;
+    a: number;
+    p: number;
+    q: number;
+    f: number;
+    l: number;
+    T: number;
+    m: boolean;
+    M: boolean;
 }

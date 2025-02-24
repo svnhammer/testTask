@@ -12,9 +12,9 @@ export class TradesService {
 
     constructor(@InjectModel(TradeEntry.name) private tradeEntryModel: Model<TradeEntryDocument>) { }
 
-    async getHistoricalTrades(symbol: string, fromId = DEFAULT_TRADE_FROM_ID): Promise<Record<string, any>[]> {
-        const response = await axios.get(`${BINANCE_BASE_URL}historicalTrades`, {
-            params: { symbol: symbol.toUpperCase(), fromId }
+    async getHistoricalTrades(symbol: string, startTime?: number, endTime?: number): Promise<Record<string, any>[]> {
+        const response = await axios.get(`${BINANCE_BASE_URL}aggTrades`, {
+            params: { symbol: symbol.toUpperCase(), startTime, endTime }
         });
 
         console.log(response);
@@ -26,14 +26,18 @@ export class TradesService {
     }
 
     async _saveHistoricalTrades(symbol: string, trades: Record<string, any>[]) {
-        this.logger.log('saving');
         if (!trades.length) return;
 
         const tradesWithSymbol = trades.map((trade: ITradeEntry) => ({
             symbol,
-            ...trade
+            id: trade.a,
+            price: trade.p,
+            firstTradeId: trade.f,
+            lastTradeId: trade.l,
+            timestamp: trade.T,
+            isBuyerMaker: trade.m,
+            isBestMatch: trade.M
         }));
-        this.logger.log('trades retrieved');
         await this.tradeEntryModel.insertMany(tradesWithSymbol);
         this.logger.log(`${trades.length} historical trades were stored in the database`);
     }

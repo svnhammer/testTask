@@ -20,16 +20,22 @@ export class TradeEntry {
   symbol: string;
 
   @Prop()
+  id: number;
+
+  @Prop()
   price: string;
 
   @Prop()
   qty: number;
 
   @Prop()
-  quoteQty: number;
+  firstTradeId: number;
 
   @Prop()
-  time: number;
+  lastTradeId: number;
+
+  @Prop()
+  timestamp: number;
 
   @Prop()
   isBuyerMaker: boolean;
