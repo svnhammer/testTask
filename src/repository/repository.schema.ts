@@ -1,15 +1,3 @@
-/*
-[
-    "id": 4584955086,
-        "price": "95656.14000000",
-        "qty": "0.00006000",
-        "quoteQty": "5.73936840",
-        "time": 1740405423935,
-        "isBuyerMaker": true,
-        "isBestMatch": true
-]
-*/
-
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type TradeEntryDocument = TradeEntry & Document;

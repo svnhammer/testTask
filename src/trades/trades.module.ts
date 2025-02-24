@@ -6,6 +6,6 @@ import { RepositoryModule } from 'src/repository/repository.module';
 @Module({
   controllers: [TradesController],
   providers: [TradesService],
-  imports: [RepositoryModule]
+  imports: [RepositoryModule],
 })
-export class TradesModule { }
+export class TradesModule {}
